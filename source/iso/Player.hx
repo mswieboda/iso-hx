@@ -14,7 +14,7 @@ class Player extends FlxGroup {
   static inline var WIDTH: Int = 64;
   static inline var HEIGHT: Int = 64;
 
-  static inline var MOVEMENT_ACCELERATION: Int = 640;
+  static inline var MOVEMENT_ACCELERATION: Int = 128;
   static inline var DRAG: Int = 640;
 
   var sprite: FlxSprite;
@@ -50,6 +50,7 @@ class Player extends FlxGroup {
     if (down && up) up = down = false;
 
     sprite.acceleration.x = 0;
+    sprite.acceleration.y = 0;
 
     if (left) {
       sprite.facing = FlxObject.LEFT;
@@ -57,6 +58,12 @@ class Player extends FlxGroup {
     } else if (right) {
       sprite.facing = FlxObject.RIGHT;
       sprite.acceleration.x += MOVEMENT_ACCELERATION;
+    }
+
+    if (up) {
+      sprite.acceleration.y -= MOVEMENT_ACCELERATION;
+    } else if (down) {
+      sprite.acceleration.y += MOVEMENT_ACCELERATION;
     }
   }
 }
